@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+*::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 32px;
+}
+
+textarea {
+    background: #1f1f1f;
+    color: ghostwhite;
+    border: none;
+    outline: none;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #d3d3d3;
+}

@@ -1,0 +1,127 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="flex w-full relative px-16 py-20 max-w-[1600px] items-start">
+        <div class="font-mono max-w-[1136px]">
+            <h3 class="w-full text-lg font-bold h-[32px] flex items-end">test the model</h3>
+            <hr class="mb-10 w-[20px] border-black border-2"/>
+            <p class="text-slate-800 text-sm text-justify leading-7 italic">
+                <i class="fas fa-info-circle"></i> Please download the dataset from <a href="">here</a> and provide a
+                test data as per the specified columns. The test data should be a json object having column names as the
+                keys and their value as the value.
+            </p>
+            <div class="w-full my-4 h-[400px] overflow-scroll">
+                <label for="json-data">
+
+                </label><textarea name="json-data" required class="rounded-xl w-full h-full p-4" type="json"
+                                  id="json-data"></textarea>
+            </div>
+            <div class="w-full rounded-full flex items-center bg-gray-200 cursor-pointer"
+                 onclick="document.getElementById('json-file').click()">
+                <span class="p-3 px-8 text-xs font-sans w-fit text-white bg-[#1f1f1f] rounded-full block">Choose file</span>
+                <span class="p-3 px-8 text-xs font-sans w-fit text-black block" id="file-name"></span>
+            </div>
+            <label>
+                <input type="file" required name="json-file" class="w-full" id="json-file" hidden>
+                <script type="text/javascript">
+                    document.getElementById("json-file").onchange = readFiles;
+
+                    function readFiles(e) {
+                        const file = e.target.files[0];
+                        document.getElementById("file-name").innerText = file.name;
+                        const reader = new FileReader();
+                        reader.addEventListener('load', (ev) => {
+                            console.log(ev.target.result);
+                            document.getElementById("json-data").value = JSON.stringify(JSON.parse(ev.target.result), null, 4);
+                        })
+                        reader.readAsText(file);
+                    }
+                </script>
+            </label>
+        </div>
+        <hr class="border h-2/3 m-8 my-auto invisible">
+        <div class="font-mono max-w-[400px] w-full">
+            <h3 class="w-full text-lg font-bold h-[32px] flex items-end">run</h3>
+            <hr class="mb-10 w-[20px] border-black border-2"/>
+
+            <div class="p-4 text-sm w-full my-4 bg-[#efefef] rounded-full">
+                <label>
+                    <select name="model" required id="model" class="rounded-full w-full outline-none border-none">
+                        <option value="">Choose model</option>
+                        {% for key in models %}
+                            <option value="{{ loop.index0 }}">{{ key }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+            </div>
+            <script type="text/javascript">
+                function submit() {
+                    if(document.getElementById("model").value === "") {
+                        document.getElementById("model").reportValidity();
+                    }
+                    if(document.getElementById("json-data").value === "") {
+                        document.getElementById("json-data").reportValidity();
+                    }
+                    const data = JSON.parse(document.getElementById("json-data").value);
+                    const model = document.getElementById("model").value;
+                    console.log(data);
+                    console.log(model);
+                    fetch(window.location.pathname, {
+                        method: "POST",
+                        body: JSON.stringify({
+                            data: data,
+                            model: model
+                        }),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    }).then((res) => {
+                        if(res.status === 200) {
+                            res.json().then((js) => {
+                                document.getElementById("result").innerText = js.result;
+                            })
+                        }
+                        console.log(res);
+                    }).catch((err) => {
+                        console.log(err);
+                        alert(err.toString());
+                    })
+                }
+            </script>
+            <button onclick="submit()" class="p-3 px-8 text-sm w-full my-4 text-white bg-[#1f1f1f] rounded-full block">Run
+            </button>
+
+            {#            <ul class="text-sm">#}
+            {#                <li class="flex items-center mb-1">#}
+            {#                    <span class="font-bold mr-2">size:</span><span>252.8 KB</span>#}
+            {#                </li>#}
+            {#                <li class="flex items-center mb-1">#}
+            {#                    <span class="font-bold mr-2">version:</span><span>1</span>#}
+            {#                </li>#}
+            {#                <li class="flex items-center mb-6">#}
+            {#                    <span class="font-bold mr-2">used:</span><span>May 20th, 2023</span>#}
+            {#                </li>#}
+            {#                <li class="flex items-center mb-1">#}
+            {#                    <span class="font-bold mr-2">rows:</span><span>160</span>#}
+            {#                </li>#}
+            {#                <li class="flex items-center mb-6">#}
+            {#                    <span class="font-bold mr-2">columns:</span><span>130</span>#}
+            {#                </li>#}
+            {#                <li class="flex items-center mb-1">#}
+            {#                    <span class="font-bold mr-2">source:</span><a#}
+            {#                        href="https://www.kaggle.com/datasets/kishore24/groundnut-oil-adulteration" target="_blank">kaggle#}
+            {#                    <i class="fas fa-link text-sm"></i></a>#}
+            {#                </li>#}
+            {#                <li class="flex items-center">#}
+            {#                    <span class="font-bold mr-2">author:</span><a href="https://www.kaggle.com/kishore24"#}
+            {#                                                                  target="_blank">kishore24 @ kaggle <i#}
+            {#                        class="fas fa-link text-sm"></i></a>#}
+            {#                </li>#}
+            {#            </ul>#}
+
+            <h3 class="w-full mt-10 text-lg font-bold h-[32px] flex items-end">result</h3>
+            <hr class="mb-10 w-[20px] border-black border-2"/>
+            <p id="result"></p>
+        </div>
+    </div>
+{% endblock %}

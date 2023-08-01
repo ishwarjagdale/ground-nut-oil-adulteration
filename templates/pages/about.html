@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+    <div class="flex w-full px-16 py-20 max-w-[1600px] items-start">
+        <div class="font-mono">
+            <h3 class="w-full text-2xl font-bold">about</h3>
+            <hr class="mb-10 w-[20px] border-black border-2"/>
+            <p class="text-slate-800 text-sm text-justify leading-7">
+                The dataset contains spectral data collected using Advanced ATR-MIR Spectroscopy for pure groundnut oil and various levels of adulteration with palm oil. The data was collected at 128 wavelengths, and there are a total of 160 data samples, with 40 samples for the pure class and 40 samples for each of the 50%, 25%, and 6.25% adulterated classes.
+                <br><br>
+                The dataset can be used for classification tasks to detect the presence of palm oil adulteration in groundnut oil. It can be useful for researchers and data scientists working in the food industry, specifically in quality control and product authentication. The dataset may also be used to develop machine learning models for detecting adulteration in other edible oils using similar spectroscopic methods.
+                <br><br>
+                The data was collected using state-of-the-art spectroscopic techniques, ensuring high accuracy and reliability.
+            </p>
+        </div>
+        <hr class="border h-2/3 m-8 my-auto">
+        <div class="font-mono max-w-[400px] w-full">
+            <h3 class="w-full text-lg font-bold h-[32px] flex items-end">data summary</h3>
+            <hr class="mb-10 w-[20px] border-black border-2"/>
+
+            <div class="w-full flex items-center justify-between border-2 rounded p-4 mb-6">
+                <span class="text-xs">Groundnut Oil Adulteration.csv</span>
+                <span class="fas fa-download text-sm text-slate-500 mx-2"></span>
+            </div>
+
+            <ul class="text-sm">
+                <li class="flex items-center mb-1">
+                    <span class="font-bold mr-2">size:</span><span>252.8 KB</span>
+                </li>
+                <li class="flex items-center mb-1">
+                    <span class="font-bold mr-2">version:</span><span>1</span>
+                </li>
+                <li class="flex items-center mb-6">
+                    <span class="font-bold mr-2">used:</span><span>May 20th, 2023</span>
+                </li>
+                <li class="flex items-center mb-1">
+                    <span class="font-bold mr-2">rows:</span><span>160</span>
+                </li>
+                <li class="flex items-center mb-6">
+                    <span class="font-bold mr-2">columns:</span><span>130</span>
+                </li>
+                <li class="flex items-center mb-1">
+                    <span class="font-bold mr-2">source:</span><a href="https://www.kaggle.com/datasets/kishore24/groundnut-oil-adulteration" target="_blank">kaggle <i class="fas fa-link text-sm"></i></a>
+                </li>
+                <li class="flex items-center">
+                    <span class="font-bold mr-2">author:</span><a href="https://www.kaggle.com/kishore24" target="_blank">kishore24 @ kaggle <i class="fas fa-link text-sm"></i></a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+
+{% endblock %}

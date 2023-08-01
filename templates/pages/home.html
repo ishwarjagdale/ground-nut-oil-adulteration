@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+    <div class="flex w-full h-full px-16 py-20 max-w-[1600px] items-start">
+        <div class="font-mono">
+            <h3 class="w-full text-2xl font-bold">introduction</h3>
+            <hr class="mb-10 w-[20px] border-black border-2"/>
+            <p class="text-slate-800 text-sm text-justify leading-7">
+                Check the purity of ground oil with the help of various machine learning models. When groundnut oil adulterated with palm oil or any other substance, the readings taken from Advanced ATR-MIR Spectroscopy differs than from pure oil.
+            </p>
+            <div class="w-full relative mt-4 overflow-hidden flex items-start">
+                <a href="images/output.png" target="_blank" class="max-w-[50%] w-full block">
+                    <img src="images/output.png" alt="line plot" class="w-full opacity-80 hover:opacity-100 border-2 object-cover">
+                </a>
+                <div class="flex-1 text-slate-800 text-sm text-justify leading-7 pl-8">
+                    <p>The image on the right shows a line plot between the wavelengths and their respective readings collected during spectroscopy.</p>
+                    <p class="my-4">
+                        <span class="font-bold mr-2">X axis: </span><span>Wavelengths (Å)</span><br>
+                        <span class="font-bold mr-2">Y axis: </span><span>Laser Spectroscopy value (Å)</span>
+                    </p>
+                    <hr/>
+                    <div class="my-4">
+                        <div class="flex">
+                            <span class="block font-bold mr-2 w-1/4">Green Line: </span><span class="text-green-600">Pure oil</span><br>
+                        </div>
+                        <div class="flex">
+                            <span class="block font-bold mr-2 w-1/4">Red Line: </span><span class="text-red-600">Adulterated with 6.25% palm oil</span><br>
+                        </div>
+                        <div class="flex">
+                            <span class="block font-bold mr-2 w-1/4">Blue Line: </span><span class="text-blue-600">Adulterated with 25% palm oil</span><br>
+                        </div>
+                        <div class="flex">
+                            <span class="block font-bold mr-2 w-1/4">Black Line: </span><span class="text-black">Adulterated with 50% palm oil</span><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
